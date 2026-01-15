@@ -30,7 +30,7 @@ describe('Login - Caminho Feliz com Fixtures', () => {
     LoginPage.clicarEntrar();
 
     // Validação da mensagem de erro
-    LoginPage.validarMensagemErro();
+    LoginPage.validarMensagemErroLogin();
 
   });
 
@@ -42,7 +42,7 @@ describe('Login - Caminho Feliz com Fixtures', () => {
     LoginPage.clicarEntrar();
 
     // Validação da mensagem de erro
-    LoginPage.validarMensagemErro();
+    LoginPage.validarMensagemErroLogin();
 
   });
 

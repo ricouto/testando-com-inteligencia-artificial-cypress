@@ -18,12 +18,12 @@ describe('Login - Fluxos sucesso e negativos aplicando Fixtures', () => {
 
   it('Login inválido - email incorreto', () => {
     LoginPage.realizarLogin(usuario.email_incorreta, usuario.senha);
-    LoginPage.validarMensagemErro();
+    LoginPage.validarMensagemErroLogin();
   });
 
   it('Login inválido - senha incorreta', () => {
     LoginPage.realizarLogin(usuario.email, usuario.senha_incorreta);
-    LoginPage.validarMensagemErro();
+    LoginPage.validarMensagemErroLogin();
   });
 
   it('Email obrigatório', () => {

@@ -1,3 +1,5 @@
+import { MENSAGENS_ALERTA } from '../support/mensagensAlerta';
+
 class LoginPage {
 
     acessar() {
@@ -36,33 +38,28 @@ class LoginPage {
         cy.url().should('include', '/logar');
     }
 
-    validarAlertaErro(texto) {
-        cy.get('div.alert.alert-danger')
-            .should('contain.text', texto);
-    }
-
     validarMensagemSucesso(nomeUsuario) {
         cy.get('div.alert.alert-success')
             .should('be.visible')
             .and('have.text', `Bem vindo, ${nomeUsuario}!`);
     }
 
-    validarMensagemErro() {
+    validarAlertaErro(mensagem) {
         cy.get('div.alert.alert-danger')
             .should('be.visible')
-            .and('have.text', 'Problemas com o login do usuário');
+            .and('contain.text', mensagem);
     }
 
-    validarMensagemSenhaObrigatoria() {
-        cy.get('div.alert.alert-danger')
-            .should('be.visible')
-            .and('have.text', 'Senha é um campo obrigatório');
+    validarMensagemErroLogin() {
+        this.validarAlertaErro(MENSAGENS_ALERTA.LOGIN_INVALIDO);
     }
 
     validarMensagemEmailObrigatorio() {
-        cy.get('div.alert.alert-danger')
-            .should('be.visible')
-            .and('have.text', 'Email é um campo obrigatório');
+        this.validarAlertaErro(MENSAGENS_ALERTA.EMAIL_OBRIGATORIO);
+    }
+
+    validarMensagemSenhaObrigatoria() {
+        this.validarAlertaErro(MENSAGENS_ALERTA.SENHA_OBRIGATORIA);
     }
 }
 
