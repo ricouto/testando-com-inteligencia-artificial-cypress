@@ -28,3 +28,22 @@ Cypress.Commands.add('alertErrorHaveText', (expectedText) => {
   cy.contains('div.alert.alert-danger', expectedText)
     .should('be.visible')
 })
+
+Cypress.Commands.add('loginApi', (email, senha) => {
+  return cy.request({
+    method: 'POST',
+    url: '/signin',
+    body: {
+      email,
+      senha
+    }
+  }).then((response) => {
+    expect(response.status).to.eq(200);
+    expect(response.body).to.have.property('token');
+
+    Cypress.env('token', response.body.token);
+
+    return response.body.token;
+  });
+});
+
