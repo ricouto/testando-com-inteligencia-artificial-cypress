@@ -1,4 +1,5 @@
 import LoginPage from '../pages/LoginPage';
+import { MENSAGENS_ALERTA } from '../support/mensagensAlerta';
 
 describe('Login - Fluxos sucesso e negativos aplicando Fixtures', () => {
 
@@ -37,15 +38,20 @@ describe('Login - Fluxos sucesso e negativos aplicando Fixtures', () => {
   });
 
   it('Campos obrigatórios', () => {
-    const alerts = [
-      'Email é um campo obrigatório',
-      'Senha é um campo obrigatório'
-    ];
+    // const alerts = [
+    //   'Email é um campo obrigatório',
+    //   'Senha é um campo obrigatório'
+    // ];
 
     LoginPage.realizarLogin();
 
-    alerts.forEach(alert => {
-      LoginPage.validarAlertaErro(alert);
-    });
+    // alerts.forEach(alert => {
+    //   LoginPage.validarAlertaErro(alert);
+    // });
+
+    LoginPage.validarMultiplosAlertas([
+      MENSAGENS_ALERTA.SENHA_OBRIGATORIA,
+      MENSAGENS_ALERTA.EMAIL_OBRIGATORIO
+    ]);
   });
 });

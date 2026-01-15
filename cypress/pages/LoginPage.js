@@ -50,17 +50,30 @@ class LoginPage {
             .and('contain.text', mensagem);
     }
 
+    validarMultiplosAlertas(mensagensEsperadas = []) {
+        cy.get('div.alert.alert-danger')
+            .should('have.length.at.least', mensagensEsperadas.length)
+            .then(($alertas) => {
+                const textosAlertas = [...$alertas].map(alerta => alerta.innerText);
+
+                mensagensEsperadas.forEach((mensagem) => {
+                    expect(textosAlertas).to.include(mensagem);
+                });
+            });
+    }
+
     validarMensagemErroLogin() {
-        this.validarAlertaErro(MENSAGENS_ALERTA.LOGIN_INVALIDO);
+        this.validarMultiplosAlertas([MENSAGENS_ALERTA.LOGIN_INVALIDO]);
     }
 
     validarMensagemEmailObrigatorio() {
-        this.validarAlertaErro(MENSAGENS_ALERTA.EMAIL_OBRIGATORIO);
+        this.validarMultiplosAlertas([MENSAGENS_ALERTA.EMAIL_OBRIGATORIO]);
     }
 
     validarMensagemSenhaObrigatoria() {
-        this.validarAlertaErro(MENSAGENS_ALERTA.SENHA_OBRIGATORIA);
+        this.validarMultiplosAlertas([MENSAGENS_ALERTA.SENHA_OBRIGATORIA]);
     }
+
 }
 
 export default new LoginPage();
